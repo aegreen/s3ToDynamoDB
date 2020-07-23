@@ -1,0 +1,52 @@
+[
+    {
+        "word": "semaine",
+        "meaning": "week",
+        "type": "fem"
+    },
+    {
+        "word": "aujourd'hui",
+        "meaning": "today",
+        "type": "masc"
+    },
+    {
+        "word": "pouvoir",
+        "meaning": "can",
+        "type": "verb"
+    },
+    {
+        "word": "aller",
+        "meaning": "to go",
+        "type": "verb"
+    },
+    {
+        "word": "regarder",
+        "meaning": "to see",
+        "type": "verb"
+    },
+    {
+        "word": "mars",
+        "meaning": "March",
+        "type": "masc"
+    },
+    {
+        "word": "huit",
+        "meaning": "eight",
+        "type": "masc"
+    },
+    {
+        "word": "vendeur",
+        "meaning": "salesman",
+        "type": "masc"
+    },
+    {
+        "word": "eau",
+        "meaning": "water",
+        "type": "fem"
+    },
+    {
+        "word": "docteur",
+        "meaning": "doctor",
+        "type": "masc"
+    }
+]

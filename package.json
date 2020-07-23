@@ -1,0 +1,13 @@
+{
+    "name": "s3-to-dynamodb",
+    "description": "Uploads a file to S3 and will copy that data to a DynamoDB table",
+    "version": "1.0.0",
+    "author": "Alice Green",
+    "dependencies": {
+        "uuid": "^8.2.0"
+    },
+    "devDependencies": {
+        "serverless-upload-assets-to-s3": "^1.0.1",
+        "copy-to-dynamodb-plugin": "1.0.0"
+    }
+}

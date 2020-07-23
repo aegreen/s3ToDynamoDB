@@ -1,0 +1,75 @@
+
+service: s3todynamodb
+
+plugins:
+  - serverless-upload-assets-to-s3
+  - copy_to_dynamodb_plugin
+
+custom:
+  assets:
+    auto: true
+    targets:
+      - bucket: 
+          Ref: MyBucket
+        files:
+          - source: assets/
+            globs: '**/*.json'
+  dynamodb: 
+    frenchWordsTable: frenchWordsTable
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  environment:
+    dynamoDBFrenchWordsTable: ${self:custom.dynamodb.frenchWordsTable}
+    s3FrenchWordsBucket: 
+      Ref: MyBucket
+
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "s3:ListBucket"
+        - "s3:PutObject"
+        - "s3:PutObjectAcl"
+        - "s3:GetObject"
+        - "s3:DeleteObject"
+      Resource: { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "MyBucket" } ] ]  }
+    - Effect: "Allow"
+      Action:
+        - "dynamodb:GetItem"
+        - "dynamodb:PutItem"
+        - "dynamodb:UpdateItem"
+        - "dynamodb:DeleteItem"
+        - "dynamodb:BatchWriteItem"
+      Resource: { "Fn::Join" : ["", ["arn:aws:dynamodb:us-east-1:515305825685:table/", { "Ref" : "frenchWordsTable" } ] ]  }
+
+functions:
+  copyToDynamoDB:
+    handler: handler.copyToDynamoDB
+    layers:
+      - {Ref: UuidLambdaLayer}
+
+resources:
+  Resources:
+    MyBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: alicesfrenchwords
+    frenchWordsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.dynamodb.frenchWordsTable}
+        AttributeDefinitions:
+          - AttributeName: ID
+            AttributeType: S
+        KeySchema:
+          - AttributeName: ID
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+
+layers:
+  uuid:
+    package:
+      artifact: uuid.zip
