@@ -1,6 +1,6 @@
 # s3ToDynamoDB
 
-# Sample application to create an S3 bucket, DynamoDB table, and Lambda function to copy files uploaded to an S3 bucket
+## Sample application to create an S3 bucket, DynamoDB table, and Lambda function to copy files uploaded to an S3 bucket
 
 Uses Serverless.com and node.js
 
